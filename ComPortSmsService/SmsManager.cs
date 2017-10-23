@@ -175,7 +175,7 @@ namespace ComPortSmsService
             }
         }
 
-        public ShortMessageCollection ReadSMS(ISerialPort port, string p_strCommand)
+        public ShortMessageCollection ReadSMS(string p_strCommand)
         {
 
             // Set up the phone and read the messages

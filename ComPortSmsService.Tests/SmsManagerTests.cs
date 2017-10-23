@@ -360,7 +360,7 @@ OK
                 });
 
                 // Act
-                ShortMessageCollection result = manager.ReadSMS(_serialPort, "AT+CMGL=\"ALL\"");
+                ShortMessageCollection result = manager.ReadSMS("AT+CMGL=\"ALL\"");
 
                 // Assert
                 Assert.AreEqual(2, result.Count);
@@ -380,7 +380,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.ReadSMS(_serialPort, "AT+CMGL=\"ALL\""),
+                Assert.That(() => manager.ReadSMS("AT+CMGL=\"ALL\""),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -403,7 +403,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.ReadSMS(_serialPort, "AT+CMGL=\"ALL\""),
+                Assert.That(() => manager.ReadSMS("AT+CMGL=\"ALL\""),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -432,7 +432,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.ReadSMS(_serialPort, "AT+CMGL=\"ALL\""),
+                Assert.That(() => manager.ReadSMS("AT+CMGL=\"ALL\""),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -465,7 +465,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.ReadSMS(_serialPort, "AT+CMGL=\"ALL\""),
+                Assert.That(() => manager.ReadSMS("AT+CMGL=\"ALL\""),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -503,7 +503,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.ReadSMS(_serialPort, "AT+CMGL=\"ALL\""),
+                Assert.That(() => manager.ReadSMS("AT+CMGL=\"ALL\""),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
