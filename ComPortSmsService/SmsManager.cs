@@ -83,16 +83,9 @@ namespace ComPortSmsService
 
         public void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            try
+            if (e.EventType == SerialData.Chars)
             {
-                if (e.EventType == SerialData.Chars)
-                {
-                    _receiveNow.Set();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                _receiveNow.Set();
             }
         }
 
