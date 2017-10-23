@@ -70,7 +70,7 @@ namespace ComPortSmsService
                 _receiveNow.Reset();
                 _serialPort.Write(command + "\r");
 
-                string input = ReadResponse(_serialPort, responseTimeout);
+                string input = ReadResponse(responseTimeout);
                 if ((input.Length == 0) || ((!input.EndsWith("\r\n> ")) && (!input.EndsWith("\r\nOK\r\n"))))
                     throw new ApplicationException("No success message was received.");
                 return input;
@@ -96,7 +96,7 @@ namespace ComPortSmsService
             }
         }
 
-        public string ReadResponse(ISerialPort port, int timeout)
+        public string ReadResponse(int timeout)
         {
             string buffer = string.Empty;
             try
@@ -105,7 +105,7 @@ namespace ComPortSmsService
                 {
                     if (_receiveNow.WaitOne(timeout, false))
                     {
-                        string t = port.ReadExisting();
+                        string t = _serialPort.ReadExisting();
                         buffer += t;
                     }
                     else

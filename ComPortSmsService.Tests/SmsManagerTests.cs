@@ -165,7 +165,7 @@ namespace ComPortSmsService.Tests
                 var manager = new SmsManager(_serialPort);
                 manager._receiveNow.Set();
 
-                var result = manager.ReadResponse(_serialPort, 300);
+                var result = manager.ReadResponse(300);
 
                 Assert.AreEqual("\r\nOK\r\n", result);
             }
@@ -177,7 +177,7 @@ namespace ComPortSmsService.Tests
                 var manager = new SmsManager(_serialPort);
                 manager._receiveNow.Set();
 
-                Assert.That(() => manager.ReadResponse(_serialPort, 300),
+                Assert.That(() => manager.ReadResponse(300),
                     Throws.Exception.TypeOf<InvalidOperationException>()
                     .With.Message.EqualTo("Operation is not valid due to the current state of the object."));
             }
@@ -189,7 +189,7 @@ namespace ComPortSmsService.Tests
                 var manager = new SmsManager(_serialPort);
                 manager._receiveNow.Set();
 
-                Assert.That(() => manager.ReadResponse(_serialPort, 300),
+                Assert.That(() => manager.ReadResponse(300),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("Response received is incomplete."));
             }
@@ -199,7 +199,7 @@ namespace ComPortSmsService.Tests
             {
                 var manager = new SmsManager(_serialPort);
 
-                Assert.That(() => manager.ReadResponse(_serialPort, 300),
+                Assert.That(() => manager.ReadResponse(300),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No data received from phone."));
             }
