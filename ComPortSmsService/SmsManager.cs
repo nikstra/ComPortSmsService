@@ -61,16 +61,16 @@ namespace ComPortSmsService
             }
         }
 
-        public string ExecCommand(ISerialPort port, string command, int responseTimeout, string errorMessage)
+        public string ExecCommand(string command, int responseTimeout, string errorMessage)
         {
             try
             {
-                port.DiscardOutBuffer();
-                port.DiscardInBuffer();
+                _serialPort.DiscardOutBuffer();
+                _serialPort.DiscardInBuffer();
                 _receiveNow.Reset();
-                port.Write(command + "\r");
+                _serialPort.Write(command + "\r");
 
-                string input = ReadResponse(port, responseTimeout);
+                string input = ReadResponse(_serialPort, responseTimeout);
                 if ((input.Length == 0) || ((!input.EndsWith("\r\n> ")) && (!input.EndsWith("\r\nOK\r\n"))))
                     throw new ApplicationException("No success message was received.");
                 return input;
@@ -133,10 +133,10 @@ namespace ComPortSmsService
 
                 // Execute Command
 
-                string recievedData = ExecCommand(port, "AT", 300, "No phone connected at ");
-                recievedData = ExecCommand(port, "AT+CMGF=1", 300, "Failed to set message format.");
+                string recievedData = ExecCommand("AT", 300, "No phone connected at ");
+                recievedData = ExecCommand("AT+CMGF=1", 300, "Failed to set message format.");
                 String command = "AT+CPMS?";
-                recievedData = ExecCommand(port, command, 1000, "Failed to count SMS message");
+                recievedData = ExecCommand(command, 1000, "Failed to count SMS message");
                 int uReceivedDataLength = recievedData.Length;
 
 
@@ -184,15 +184,15 @@ namespace ComPortSmsService
             {
                 // Execute Command
                 // Check connection
-                ExecCommand(port, "AT", 300, "No phone connected");
+                ExecCommand("AT", 300, "No phone connected");
                 // Use message format "Text mode"
-                ExecCommand(port, "AT+CMGF=1", 300, "Failed to set message format.");
+                ExecCommand("AT+CMGF=1", 300, "Failed to set message format.");
                 // Use character set "PCCP437"
-                ExecCommand(port, "AT+CSCS=\"PCCP437\"", 300, "Failed to set character set.");
+                ExecCommand("AT+CSCS=\"PCCP437\"", 300, "Failed to set character set.");
                 // Select SIM storage
-                ExecCommand(port, "AT+CPMS=\"SM\"", 300, "Failed to select message storage.");
+                ExecCommand("AT+CPMS=\"SM\"", 300, "Failed to select message storage.");
                 // Read the messages
-                string input = ExecCommand(port, p_strCommand, 5000, "Failed to read the messages.");
+                string input = ExecCommand(p_strCommand, 5000, "Failed to read the messages.");
 
                 // Parse messages
                 messages = ParseMessages(input);
@@ -248,12 +248,12 @@ namespace ComPortSmsService
             try
             {
 
-                string recievedData = ExecCommand(port, "AT", 300, "No phone connected");
-                recievedData = ExecCommand(port, "AT+CMGF=1", 300, "Failed to set message format.");
+                string recievedData = ExecCommand("AT", 300, "No phone connected");
+                recievedData = ExecCommand("AT+CMGF=1", 300, "Failed to set message format.");
                 String command = "AT+CMGS=\"" + PhoneNo + "\"";
-                recievedData = ExecCommand(port, command, 300, "Failed to accept phoneNo");
+                recievedData = ExecCommand(command, 300, "Failed to accept phoneNo");
                 command = Message + char.ConvertFromUtf32(26) + "\r";
-                recievedData = ExecCommand(port, command, 3000, "Failed to send message"); //3 seconds
+                recievedData = ExecCommand(command, 3000, "Failed to send message"); //3 seconds
                 if (recievedData.EndsWith("\r\nOK\r\n"))
                 {
                     isSend = true;
@@ -290,10 +290,10 @@ namespace ComPortSmsService
             {
 
                 // Execute Command
-                string recievedData = ExecCommand(port, "AT", 300, "No phone connected");
-                recievedData = ExecCommand(port, "AT+CMGF=1", 300, "Failed to set message format.");
+                string recievedData = ExecCommand("AT", 300, "No phone connected");
+                recievedData = ExecCommand("AT+CMGF=1", 300, "Failed to set message format.");
                 String command = p_strCommand;
-                recievedData = ExecCommand(port, command, 300, "Failed to delete message");
+                recievedData = ExecCommand(command, 300, "Failed to delete message");
 
                 if (recievedData.EndsWith("\r\nOK\r\n"))
                 {

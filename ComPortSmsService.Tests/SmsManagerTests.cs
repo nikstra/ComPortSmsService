@@ -133,7 +133,7 @@ namespace ComPortSmsService.Tests
 
                 manager.OpenPort("COM2", 9600, 8, 300, 300);
                 //_serialPort.DataReceived += Raise.Event<SerialDataReceivedEventHandler>(eventArgs);
-                var result = manager.ExecCommand(_serialPort, "AT", 300, "No phone connected");
+                var result = manager.ExecCommand("AT", 300, "No phone connected");
                 manager.ClosePort();
 
                 Assert.AreEqual(result, "\r\nOK\r\n");
@@ -147,7 +147,7 @@ namespace ComPortSmsService.Tests
                 var manager = new SmsManager(serialPort);
 
                 manager.OpenPort("COM9", 9600, 8, 300, 300);
-                var result = manager.ExecCommand(serialPort, "AT", 300, "No phone connected");
+                var result = manager.ExecCommand("AT", 300, "No phone connected");
                 manager.ClosePort();
 
                 // Since ATE1 is the default the AT command is echoed back.
