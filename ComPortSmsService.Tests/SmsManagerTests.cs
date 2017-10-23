@@ -95,7 +95,7 @@ namespace ComPortSmsService.Tests
                 _serialPort.IsOpen.Returns(false);
                 var manager = new SmsManager(_serialPort);
 
-                manager.ClosePort(_serialPort);
+                manager.ClosePort();
 
                 Assert.IsFalse(manager.PortIsOpen);
             }
@@ -106,7 +106,7 @@ namespace ComPortSmsService.Tests
                 _serialPort.When(call => call.Close()).Do(callback => { throw new IOException(); });
                 var manager = new SmsManager(_serialPort);
 
-                Assert.That(() => manager.ClosePort(_serialPort),
+                Assert.That(() => manager.ClosePort(),
                     Throws.Exception.TypeOf<IOException>()
                     .With.Message.EqualTo("I/O error occurred."));
             }
@@ -134,7 +134,7 @@ namespace ComPortSmsService.Tests
                 manager.OpenPort("COM2", 9600, 8, 300, 300);
                 //_serialPort.DataReceived += Raise.Event<SerialDataReceivedEventHandler>(eventArgs);
                 var result = manager.ExecCommand(_serialPort, "AT", 300, "No phone connected");
-                manager.ClosePort(_serialPort);
+                manager.ClosePort();
 
                 Assert.AreEqual(result, "\r\nOK\r\n");
             }
@@ -148,7 +148,7 @@ namespace ComPortSmsService.Tests
 
                 manager.OpenPort("COM9", 9600, 8, 300, 300);
                 var result = manager.ExecCommand(serialPort, "AT", 300, "No phone connected");
-                manager.ClosePort(serialPort);
+                manager.ClosePort();
 
                 // Since ATE1 is the default the AT command is echoed back.
                 Assert.AreEqual("AT\r\r\nOK\r\n", result);

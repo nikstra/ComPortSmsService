@@ -47,13 +47,13 @@ namespace ComPortSmsService
             return _serialPort; // Why???
         }
 
-        public void ClosePort(ISerialPort port) // port as argument, Why???
+        public void ClosePort()
         {
             try
             {
-                port.Close();
-                port.DataReceived -= new SerialDataReceivedEventHandler(port_DataReceived);
-                port = null;
+                _serialPort.Close();
+                _serialPort.DataReceived -= new SerialDataReceivedEventHandler(port_DataReceived);
+                //_serialPort = null;
             }
             catch (Exception ex)
             {
