@@ -13,7 +13,7 @@ namespace ComPortSmsService
     {
         private ISerialPort _serialPort;
         public AutoResetEvent _receiveNow = new AutoResetEvent(false);
-        static AutoResetEvent _readNow = new AutoResetEvent(false);
+
         public bool PortIsOpen => _serialPort.IsOpen;
 
         public SmsManager(ISerialPort serialPort/*, AutoResetEvent receiveNow*/)
@@ -34,7 +34,7 @@ namespace ComPortSmsService
                 _serialPort.ReadTimeout = readTimeout;    //300
                 _serialPort.WriteTimeout = writeTimeout;  //300
                 _serialPort.Encoding = Encoding.GetEncoding("iso-8859-1");
-                _serialPort.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
+                _serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
                 _serialPort.Open();
                 _serialPort.DtrEnable = true;
                 _serialPort.RtsEnable = true;
@@ -52,7 +52,7 @@ namespace ComPortSmsService
             try
             {
                 _serialPort.Close();
-                _serialPort.DataReceived -= new SerialDataReceivedEventHandler(port_DataReceived);
+                _serialPort.DataReceived -= new SerialDataReceivedEventHandler(DataReceived);
                 //_serialPort = null;
             }
             catch (Exception ex)
@@ -81,7 +81,7 @@ namespace ComPortSmsService
             }
         }
 
-        public void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        public void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
             {
@@ -255,19 +255,6 @@ namespace ComPortSmsService
                     isSend = false;
                 }
                 return isSend;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        static void DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            try
-            {
-                if (e.EventType == SerialData.Chars)
-                    _readNow.Set();
             }
             catch (Exception ex)
             {
