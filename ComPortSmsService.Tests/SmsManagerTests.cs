@@ -231,7 +231,7 @@ namespace ComPortSmsService.Tests
                 });
 
                 // Act
-                int count = manager.CountSMSmessages(_serialPort);
+                int count = manager.CountSMSmessages();
 
                 // Assert
                 Assert.AreEqual(4, count);
@@ -251,7 +251,7 @@ namespace ComPortSmsService.Tests
 
                 // Act
                 // Assert
-                Assert.That(() => manager.CountSMSmessages(_serialPort),
+                Assert.That(() => manager.CountSMSmessages(),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -274,7 +274,7 @@ namespace ComPortSmsService.Tests
 
                 // Act
                 // Assert
-                Assert.That(() => manager.CountSMSmessages(_serialPort),
+                Assert.That(() => manager.CountSMSmessages(),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -302,7 +302,7 @@ namespace ComPortSmsService.Tests
 
                 // Act
                 // Assert
-                Assert.That(() => manager.CountSMSmessages(_serialPort),
+                Assert.That(() => manager.CountSMSmessages(),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }

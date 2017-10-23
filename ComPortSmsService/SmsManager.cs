@@ -125,7 +125,7 @@ namespace ComPortSmsService
             return buffer;
         }
 
-        public int CountSMSmessages(ISerialPort port)
+        public int CountSMSmessages()
         {
             int CountTotalMessages = 0;
             try
