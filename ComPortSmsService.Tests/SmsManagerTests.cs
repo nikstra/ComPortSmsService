@@ -578,7 +578,7 @@ OK
                 });
 
                 // Act
-                bool result = manager.sendMsg(_serialPort, "+31628870634", "Hello World!");
+                bool result = manager.sendMsg("+31628870634", "Hello World!");
 
                 // Assert
                 Assert.AreEqual(true, result);
@@ -597,7 +597,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.sendMsg(_serialPort, "+31628870634", "Hello World!"),
+                Assert.That(() => manager.sendMsg("+31628870634", "Hello World!"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -620,7 +620,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.sendMsg(_serialPort, "+31628870634", "Hello World!"),
+                Assert.That(() => manager.sendMsg("+31628870634", "Hello World!"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -648,7 +648,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.sendMsg(_serialPort, "+31628870634", "Hello World!"),
+                Assert.That(() => manager.sendMsg("+31628870634", "Hello World!"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -680,7 +680,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.sendMsg(_serialPort, "+31628870634", "Hello World!"),
+                Assert.That(() => manager.sendMsg("+31628870634", "Hello World!"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }

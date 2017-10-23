@@ -241,7 +241,7 @@ namespace ComPortSmsService
         }
 
 
-        public bool sendMsg(ISerialPort port, string PhoneNo, string Message)
+        public bool sendMsg(string PhoneNo, string Message)
         {
             bool isSend = false;
 
