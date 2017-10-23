@@ -711,7 +711,7 @@ OK
                 });
 
                 // Act
-                bool result = manager.DeleteMsg(_serialPort, "AT+CMGD=1,3");
+                bool result = manager.DeleteMsg("AT+CMGD=1,3");
 
                 // Assert
                 Assert.AreEqual(true, result);
@@ -730,7 +730,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.DeleteMsg(_serialPort, "AT+CMGD=1,3"),
+                Assert.That(() => manager.DeleteMsg("AT+CMGD=1,3"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -753,7 +753,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.DeleteMsg(_serialPort, "AT+CMGD=1,3"),
+                Assert.That(() => manager.DeleteMsg("AT+CMGD=1,3"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -781,7 +781,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.DeleteMsg(_serialPort, "AT+CMGD=1,3"),
+                Assert.That(() => manager.DeleteMsg("AT+CMGD=1,3"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }

@@ -283,7 +283,7 @@ namespace ComPortSmsService
             }
         }
 
-        public bool DeleteMsg(ISerialPort port, string p_strCommand)
+        public bool DeleteMsg(string p_strCommand)
         {
             bool isDeleted = false;
             try
