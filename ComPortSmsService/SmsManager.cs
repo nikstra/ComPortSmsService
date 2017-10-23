@@ -125,40 +125,33 @@ namespace ComPortSmsService
             return buffer;
         }
 
-        public int CountSMSmessages()
+        public int CountMessages()
         {
-            int CountTotalMessages = 0;
+            int totalMessagesCount = 0;
             try
             {
-
                 // Execute Command
-
                 string recievedData = ExecCommand("AT", 300, "No phone connected at ");
                 recievedData = ExecCommand("AT+CMGF=1", 300, "Failed to set message format.");
-                String command = "AT+CPMS?";
-                recievedData = ExecCommand(command, 1000, "Failed to count SMS message");
-                int uReceivedDataLength = recievedData.Length;
-
+                recievedData = ExecCommand("AT+CPMS?", 1000, "Failed to count SMS message");
+                int receivedDataLength = recievedData.Length;
 
                 // If command is executed successfully
                 //if ((recievedData.Length >= 45) && (recievedData.StartsWith("AT+CPMS?")))
                 if ((recievedData.Length >= 45) && (recievedData.StartsWith("+CPMS:")))
                 {
-
                     // Parsing SMS
                     string[] strSplit = recievedData.Split(',');
-                    string strMessageStorageArea1 = strSplit[0];     //SM
-                    string strMessageExist1 = strSplit[1];           //Msgs exist in SM
+                    string messageStorageArea1 = strSplit[0];     //SM
+                    string messageExist1 = strSplit[1];           //Msgs exist in SM
 
                     // Count Total Number of SMS In SIM
-                    CountTotalMessages = Convert.ToInt32(strMessageExist1);
-
+                    totalMessagesCount = Convert.ToInt32(messageExist1);
                 }
 
                 // If command is not executed successfully
                 else if (recievedData.Contains("ERROR"))
                 {
-
                     // Error in Counting total number of SMS
                     string recievedError = recievedData;
                     recievedError = recievedError.Trim();
@@ -166,8 +159,7 @@ namespace ComPortSmsService
 
                 }
 
-                return CountTotalMessages;
-
+                return totalMessagesCount;
             }
             catch (Exception ex)
             {
@@ -175,7 +167,7 @@ namespace ComPortSmsService
             }
         }
 
-        public ShortMessageCollection ReadSMS(string p_strCommand)
+        public ShortMessageCollection ReadMessages(string command)
         {
 
             // Set up the phone and read the messages
@@ -192,7 +184,7 @@ namespace ComPortSmsService
                 // Select SIM storage
                 ExecCommand("AT+CPMS=\"SM\"", 300, "Failed to select message storage.");
                 // Read the messages
-                string input = ExecCommand(p_strCommand, 5000, "Failed to read the messages.");
+                string input = ExecCommand(command, 5000, "Failed to read the messages.");
 
                 // Parse messages
                 messages = ParseMessages(input);
@@ -241,7 +233,7 @@ namespace ComPortSmsService
         }
 
 
-        public bool sendMsg(string PhoneNo, string Message)
+        public bool SendMessage(string phoneNo, string message)
         {
             bool isSend = false;
 
@@ -250,9 +242,9 @@ namespace ComPortSmsService
 
                 string recievedData = ExecCommand("AT", 300, "No phone connected");
                 recievedData = ExecCommand("AT+CMGF=1", 300, "Failed to set message format.");
-                String command = "AT+CMGS=\"" + PhoneNo + "\"";
+                string command = "AT+CMGS=\"" + phoneNo + "\"";
                 recievedData = ExecCommand(command, 300, "Failed to accept phoneNo");
-                command = Message + char.ConvertFromUtf32(26) + "\r";
+                command = message + char.ConvertFromUtf32(26) + "\r";
                 recievedData = ExecCommand(command, 3000, "Failed to send message"); //3 seconds
                 if (recievedData.EndsWith("\r\nOK\r\n"))
                 {
@@ -283,7 +275,7 @@ namespace ComPortSmsService
             }
         }
 
-        public bool DeleteMsg(string p_strCommand)
+        public bool DeleteMessage(string command)
         {
             bool isDeleted = false;
             try
@@ -292,7 +284,6 @@ namespace ComPortSmsService
                 // Execute Command
                 string recievedData = ExecCommand("AT", 300, "No phone connected");
                 recievedData = ExecCommand("AT+CMGF=1", 300, "Failed to set message format.");
-                String command = p_strCommand;
                 recievedData = ExecCommand(command, 300, "Failed to delete message");
 
                 if (recievedData.EndsWith("\r\nOK\r\n"))

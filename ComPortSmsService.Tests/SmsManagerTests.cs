@@ -231,7 +231,7 @@ namespace ComPortSmsService.Tests
                 });
 
                 // Act
-                int count = manager.CountSMSmessages();
+                int count = manager.CountMessages();
 
                 // Assert
                 Assert.AreEqual(4, count);
@@ -251,7 +251,7 @@ namespace ComPortSmsService.Tests
 
                 // Act
                 // Assert
-                Assert.That(() => manager.CountSMSmessages(),
+                Assert.That(() => manager.CountMessages(),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -274,7 +274,7 @@ namespace ComPortSmsService.Tests
 
                 // Act
                 // Assert
-                Assert.That(() => manager.CountSMSmessages(),
+                Assert.That(() => manager.CountMessages(),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -302,7 +302,7 @@ namespace ComPortSmsService.Tests
 
                 // Act
                 // Assert
-                Assert.That(() => manager.CountSMSmessages(),
+                Assert.That(() => manager.CountMessages(),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -360,7 +360,7 @@ OK
                 });
 
                 // Act
-                ShortMessageCollection result = manager.ReadSMS("AT+CMGL=\"ALL\"");
+                ShortMessageCollection result = manager.ReadMessages("AT+CMGL=\"ALL\"");
 
                 // Assert
                 Assert.AreEqual(2, result.Count);
@@ -380,7 +380,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.ReadSMS("AT+CMGL=\"ALL\""),
+                Assert.That(() => manager.ReadMessages("AT+CMGL=\"ALL\""),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -403,7 +403,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.ReadSMS("AT+CMGL=\"ALL\""),
+                Assert.That(() => manager.ReadMessages("AT+CMGL=\"ALL\""),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -432,7 +432,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.ReadSMS("AT+CMGL=\"ALL\""),
+                Assert.That(() => manager.ReadMessages("AT+CMGL=\"ALL\""),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -465,7 +465,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.ReadSMS("AT+CMGL=\"ALL\""),
+                Assert.That(() => manager.ReadMessages("AT+CMGL=\"ALL\""),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -503,7 +503,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.ReadSMS("AT+CMGL=\"ALL\""),
+                Assert.That(() => manager.ReadMessages("AT+CMGL=\"ALL\""),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -578,7 +578,7 @@ OK
                 });
 
                 // Act
-                bool result = manager.sendMsg("+31628870634", "Hello World!");
+                bool result = manager.SendMessage("+31628870634", "Hello World!");
 
                 // Assert
                 Assert.AreEqual(true, result);
@@ -597,7 +597,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.sendMsg("+31628870634", "Hello World!"),
+                Assert.That(() => manager.SendMessage("+31628870634", "Hello World!"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -620,7 +620,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.sendMsg("+31628870634", "Hello World!"),
+                Assert.That(() => manager.SendMessage("+31628870634", "Hello World!"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -648,7 +648,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.sendMsg("+31628870634", "Hello World!"),
+                Assert.That(() => manager.SendMessage("+31628870634", "Hello World!"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -680,7 +680,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.sendMsg("+31628870634", "Hello World!"),
+                Assert.That(() => manager.SendMessage("+31628870634", "Hello World!"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -711,7 +711,7 @@ OK
                 });
 
                 // Act
-                bool result = manager.DeleteMsg("AT+CMGD=1,3");
+                bool result = manager.DeleteMessage("AT+CMGD=1,3");
 
                 // Assert
                 Assert.AreEqual(true, result);
@@ -730,7 +730,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.DeleteMsg("AT+CMGD=1,3"),
+                Assert.That(() => manager.DeleteMessage("AT+CMGD=1,3"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -753,7 +753,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.DeleteMsg("AT+CMGD=1,3"),
+                Assert.That(() => manager.DeleteMessage("AT+CMGD=1,3"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
@@ -781,7 +781,7 @@ OK
 
                 // Act
                 // Assert
-                Assert.That(() => manager.DeleteMsg("AT+CMGD=1,3"),
+                Assert.That(() => manager.DeleteMessage("AT+CMGD=1,3"),
                     Throws.Exception.TypeOf<ApplicationException>()
                     .With.Message.EqualTo("No success message was received."));
             }
