@@ -30,6 +30,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GSMCommServer, Version=1.21.0.0, Culture=neutral, PublicKeyToken=515d87df384dcc81, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSMComm.1.21.1\lib\GSMCommServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GSMCommShared, Version=1.21.0.0, Culture=neutral, PublicKeyToken=515d87df384dcc81, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSMComm.1.21.1\lib\GSMCommShared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GSMCommunication, Version=1.21.0.0, Culture=neutral, PublicKeyToken=515d87df384dcc81, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSMComm.1.21.1\lib\GSMCommunication.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PDUConverter, Version=1.21.0.0, Culture=neutral, PublicKeyToken=515d87df384dcc81, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSMComm.1.21.1\lib\PDUConverter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +62,9 @@
     <Compile Include="SmsManager.cs" />
     <Compile Include="SystemSerialPort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
